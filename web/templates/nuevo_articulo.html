@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% load bootstrap3 %}
+{% block content %}
+<h2>Añadir un nuevo Artículo</h2>
+<form enctype="multipart/form-data" method="post" action="" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Enviar
+        </button>
+    {% endbuttons %}
+</form>
+{% endblock %}

@@ -1,0 +1,1 @@
+Lo sentimos, hemos cometido un error al registrar una transacción de {{ horas }} horas entre el socio {{ vendedor }}({{ num_vendedor }}) y el socio {{ comprador }}({{num_comprador }}). Sentimos las molestias. Un saludo.

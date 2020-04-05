@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% block content %}
+<h1 class="sub-header">Resultados</h1>
+<div class="list-group">
+  <p class="list-group-item active">{{ cat }} > {{ subcat }}</p>
+{% for i in  articulo.all %}
+{% if i.user.is_active %}
+  <div>
+    <form action='' name="form{{ forloop.counter }}" method="post">
+      {% csrf_token %} 
+      <input type="hidden" name="nombre" value="{{ i.nombre }}">
+      <input type="hidden" name="categoria" value="{{ i.categoria }}">
+      <input type="hidden" name="subcategoria" value="{{ i.subcategoria }}">
+    </form>
+  </div>
+  <a class="list-group-item" onclick="direccionar({{ forloop.counter }})">{{ i.nombre |quitarcom }}</a>
+{% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}

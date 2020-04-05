@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="sub-header">Novedades {{ tipo }}</h1>
+<div class="table-responsive">
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th>Artículo</th>
+        <th>Categoria</th>
+        <th>Subcategoria</th>
+        <th>Socio/a</th>
+        <th>email</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+{% for i in  arts %}
+    <tbody>
+      <tr>
+        <td>{{ i.nombre }}</td>
+        <td>{{ i.categoria }}</td>
+        <td>{{ i.subcategoria }}</td>
+        <td>{{ i.user.first_name }}</td>
+      {% if i.user.socio.mostrar_email %}
+        <td>{{ i.user.email }}</td>
+      {% else %}
+        <td>No proporcionado</td>
+      {% endif %}
+      {% if i.user.socio.mostrar_telefono %}
+        <td>{{ i.user.socio.telefono }}</td>
+      {% else %}
+        <td>No proporcionado</td>
+      {% endif %}
+      </tr>
+    </tbody>
+{% endfor %}
+  </table>
+</div>
+
+{% endblock %}

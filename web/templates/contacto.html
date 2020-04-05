@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% block menu %}
+          <ul class="nav navbar-nav">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="{% url 'cuentas' %}">Cuentas</a></li>
+            <li><a href="{% url 'busqueda' %}">Búsqueda</a></li>
+            <li><a href="{% url 'editar' %}">Editar Datos</a></li>
+            <li><a href="{% url 'novedades' %}">Novedades</a></li>
+            <li class="active"><a href="#">Contacto</a></li>
+          </ul>
+{% endblock %}
+{% block content %}
+<h1>Contacto</h1>
+{% endblock %}
+{% block abajo %}
+<div class="row">
+ <div class="col-md-4">
+  <h2>Oficina Casavieja</h2>
+  <p>Lunes 20:00-21:00 El Perla(Bar Viñuela)</p>
+ </div>
+ <div class="col-md-4">
+  <h2>Oficina Piedralaves</h2>
+  <p>Martes 19:00-20:00 Bar Macario</p>
+ </div>
+ <div class="col-md-4">
+  <h2>Oficina La Iglesuela</h2>
+  <p>Martes 19:00-20:00 El local de La Iglesuela</p>
+ </div>
+{% endblock %}

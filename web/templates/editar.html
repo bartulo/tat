@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% load bootstrap4 %}
+{% block content %}
+  <h2>Editar datos de {{ user.first_name }}</h2>
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_form form_socio %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            Guardar Datos
+        </button>
+    {% endbuttons %}
+    </form>
+<h2 class="sub-header">Editar bienes y servicios</h2>
+<div class="list-group">
+
+{% if ofertas %}
+
+<h3 class="sub-header">Editar Ofertas</h3>
+{% for i in  ofertas %}
+{% if i.activo %}
+  <a class="list-group-item list-group-item-success col-md-10 col-sm-9 col-xs-8" href="/web/editar/{{ i.pk }}" title="Editar Oferta">{{ i.nombre |quitarcom }}</a>
+  <a class="list-group-item list-group-item-danger col-md-2 col-sm-3 col-xs-4" href="{% url 'borrar_articulo' i.pk %}">Eliminar</a>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if demandas %}
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="sub-header espacio-arriba">Editar Demandas</h3>
+			{% for i in  demandas %}
+				{% if i.activo %}
+  					<a class="list-group-item list-group-item-info col-md-10 col-sm-9 col-xs-8" href="/web/editar/{{ i.pk }}" title="Editar Demanda">{{ i.nombre |quitarcom }}</a>
+  					<a id="borrar" class="list-group-item list-group-item-danger col-md-2 col-sm-3 col-xs-4" href="{% url 'borrar_articulo' i.pk %}">Eliminar</a>
+				{% endif %}
+			{% endfor %}
+	</div>
+</div>
+{% endif %}
+</div>
+<div class="row">
+<div class="col-md-12">
+<h2 class="sub-header">Crear nuevo artículo</h2>
+<a class="btn btn-lg btn-success" href="{% url 'nuevo_articulo' %}" role="button">Nuevo Artículo</a>
+</div>
+</div>
+{% endblock %}

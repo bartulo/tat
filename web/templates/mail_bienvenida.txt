@@ -1,0 +1,36 @@
+Estimado amig@: 
+
+Te damos la bienvenida a Tiempo al Tiempo. 
+
+Te recomendamos acceder a la pagina web http://tiempoaltiempo.org. Allí puedes consultar todas las ofertas y novedades en nuestra red. 
+
+Tu número de soci@ de Tiempo al Tiempo es el {{ username }}. Puedes crear una contraseña en http://tiempoaltiempo.org/reset donde te pedirá que introduzcas tu email.
+
+Te adjuntamos  una guia del usuario de la pagina web. 
+
+Para cualquier duda, sugerencia, opinión... no dudes en ponerte en contacto con nosotros.
+
+La administración
+
+
+TIEMPO AL TIEMPO
+OFICINAS:
+
+Oficina Casavieja
+
+Lunes 20:00-21:00 El Perla(Bar Viñuela)
+
+Oficina Piedralaves
+
+Martes 19:00-20:00h Bar Macario
+
+Oficina La Iglesuela
+
+Martes 16:00-17:00 El local de La Iglesuela
+
+
+
+Pagina web: http://tiempoaltiempo.org/
+Correo electrónico: tiempoaltiempotietar@gmail.com
+
+ 

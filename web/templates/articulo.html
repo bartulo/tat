@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% block content %}
+<h1 class="sub-header">{{ nombre | quitarcom }}</h1>
+<div class="table-responsive">
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th><h2>Socio</h2></th>
+        <th><h2>Teléfono</h2></th>
+        <th><h2>e-mail<h2></th>
+        <th><h2>Pueblo<h2></th>
+        <th><h2>Descripción<h2></th>
+	<th><h2>Imagen del Artículo</h2></th>
+      </tr>
+    </thead>
+{% for i in  articulo.all %}
+{% if i.user.is_active %}
+    <tbody>
+      <tr>
+        <td>{{ i.user.first_name }} {{ i.user.last_name }}</td>
+{% if i.user.socio.mostrar_telefono %}
+        <td>{{ i.user.socio.telefono }}</td>
+{% else %}
+        <td>No proporcionado</td>
+{% endif %}
+{% if i.user.socio.mostrar_email %}
+        <td>{{ i.user.email }}</td>
+{% else %}
+        <td>No proporcionado</td>
+{% endif %}
+        <td>{{ i.user.socio.pueblo }}</td>
+        <td>{{ i.descripcion }}</td>i
+{% if i.imagen %}
+        <td><a href="" target="_blank">Registro de Intercambio</a></td>
+{% else %}
+        <td>No hay imagen</td>
+{% endif %}
+      </tr>
+    </tbody>
+{% endif %}
+{% endfor %}
+  </table>
+</div>
+
+
+{% endblock %}

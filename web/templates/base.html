@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+function direccionar(num)
+{
+$('form[name=form' + num + ']').submit();
+}
+    </script>
+
+    <title>Tiempo al Tiempo</title>
+
+  </head>
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+{% load app_filters %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+
+
+  <body>
+      {% include "navbar.html"%}
+    <div class="container">
+    <div class="jumbotron">
+	    {% block content %}{% endblock %}
+    </div>
+	    {% block abajo %}{% endblock %}
+     </div>
+
+</body>
+</html>

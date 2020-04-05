@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% block content %}
+<h1>Búsqueda Demandas</h1>
+<div class="row">
+<h2>Búsqueda por categoría</h2>
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    Bienes compra <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+      {% for i in bienes_comp %}
+    <li><a href="{% url 'resultado_demandas' 'bienes_comp' i.pk %}">{{ i.nombre }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    Bienes alquiler <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+      {% for i in bienes_alq %}
+    <li><a href="{% url 'resultado_demandas' 'bienes_alq' i.pk %}">{{ i.nombre }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    Clases <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+      {% for i in clases %}
+    <li><a href="{% url 'resultado_demandas' 'clases' i.pk %}">{{ i.nombre }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    Servicios <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+      {% for i in servicios %}
+    <li><a href="{% url 'resultado_demandas' 'servicios' i.pk %}">{{ i.nombre }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="row">
+<h2>Búsqueda por palabra</h2>
+  <div class="col-md-7">
+      <form action="{% url 'busqueda_palabra' %}" method="post">
+    <div class="input-group">
+      {% csrf_token %} 
+      <input type="text" name="palabra" class="form-control" placeholder="Buscar artículos que contengan..."></input>
+      <input type="hidden" name="tipo" value="demanda"></input>
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-default">Buscar</button>
+      </span>
+    </div><!-- /input-group -->
+      </form>
+  </div><!-- /.col-lg-6 -->
+</div>
+{% endblock %}

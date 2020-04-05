@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% block content %}
+<h1 class="sub-header">Resultados de {{tipo}}s</h1>
+<div class="list-group">
+{% if articulo.count == 0 %}
+<p>No hay resultados para tu busqueda</p>
+{% else %}
+{% for i in  articulo.all %}
+{% if i.user.is_active %}
+{% ifchanged i.categoria or i.subcategoria %}
+  <a class="list-group-item active">{{ i.get_categoria_display | upper }} > {{ i.subcategoria }}</a>
+{% endifchanged %}
+    <form action='{% url 'resultado_palabra' %}' name="form{{ forloop.counter }}" method="post">
+      {% csrf_token %} 
+      <input type="hidden" name="palab" value="{{ i.nombre }}">
+      <input type="hidden" name="tipo" value="{{ i.tipo }}">
+    </form>
+  <a class="list-group-item" onclick="direccionar({{ forloop.counter }})">{{ i.nombre |quitarcom }}</a>
+{% endif %}
+{% endfor %}
+{% endif %}
+</div>
+
+{% endblock %}
