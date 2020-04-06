@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from web.models import *
 from web.forms import *
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 #from django.core.urlresolvers import reverse
 #from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.views.generic.edit import CreateView
 
 from django.template import loader
+
+def logout_view(request):
+  logout(request)
+  return HttpResponseRedirect('/')
+
 
 ### BUSQUEDA POR PALABRA ###
 def busqueda_palabra(request):

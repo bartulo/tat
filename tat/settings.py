@@ -25,7 +25,7 @@ SECRET_KEY = 'zuip-&ibos-*d%*6k-@1ub)!f1tw*7-a=%1vyz5o+4)rtd042)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['94.23.199.177']
+ALLOWED_HOSTS = ['tiempoaltiempo.org']
 
 
 # Application definition
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap4',
+    'bootstrap3',
+    'smart_selects',
 ]
 
 MIDDLEWARE = [
@@ -109,9 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
@@ -124,3 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'tiempodata')
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = "/"

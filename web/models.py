@@ -27,7 +27,7 @@ class Socio(models.Model):
     ordering = ['numsocio',]
 
   def __str__(self):
-    return self.numsocio
+    return str(self.numsocio)
 
 # MANDAR CORREO de BIENVENIDA
 
