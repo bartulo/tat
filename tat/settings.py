@@ -25,7 +25,7 @@ SECRET_KEY = 'zuip-&ibos-*d%*6k-@1ub)!f1tw*7-a=%1vyz5o+4)rtd042)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tiempoaltiempo.org']
+ALLOWED_HOSTS = ['tiempoaltiempo.org', 'localhost']
 
 
 # Application definition
@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'prueba',
-        'USER': 'servidor',
+        'USER': 'nano',
         'PASSWORD': 'ventanuco',
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -130,3 +130,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'tiempodata')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = "/"
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'tiempoaltiempotietar@gmail.com'
+EMAIL_HOST_PASSWORD = 'admintietar'
+EMAIL_PORT = 587
+

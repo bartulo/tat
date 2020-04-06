@@ -43,7 +43,7 @@
               <a href="{% url 'contacto' %}">Contacto</a>
             </li>
           </ul>
-	<a type="button" class="btn btn-default navbar-btn navbar-right btn-danger" href="/logout">Salir</a>
+          <a type="button" class="btn btn-default navbar-btn navbar-right btn-danger" href="{% url 'logout' %}">Salir</a>
     {% else %}
           <form method="post" action="{% url 'login' %}" class="navbar-form navbar-right">
         {% csrf_token %}

@@ -32,6 +32,6 @@ $(document).ready(function(){
     {% else %}
 	<h1>Bienvenido a Tiempo al Tiempo</h1>
         <p>Por favor, regístrate</p>
-        <a href="">¿Has olvidado tu contraseña?</a>
+        <a href="{% url 'password_reset' %}">¿Has olvidado tu contraseña?</a>
     {% endif %}
 {% endblock %}

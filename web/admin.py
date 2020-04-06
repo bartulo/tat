@@ -8,6 +8,7 @@ from django import forms
 from web.models import *
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.db.models import Sum
 
 #### Clase para ordenar el filtro vendedor de la página de cuentas 
 
@@ -131,25 +132,36 @@ class UserAdmin(UserAdmin):
   num_user.short_description = 'Numero de socio'
 
   def horas_positivas(self, obj):
-    total = 0  
-    for i in obj.vendedor.all():
-      total = total + i.horas
-    for n in obj.adminind_set.all():
-      total = total + n.horas
+#    for n in obj.adminind_set.all():
+#      total = total + n.horas
+#    return "%.2f" % total
+    total_usuario = total_admin = 0
+    if obj.vendedor.count() != 0:
+      total_usuario = obj.vendedor.aggregate(t=Sum('horas'))['t']
+    if obj.adminind_set.count() != 0:
+      total_admin = obj.adminind_set.aggregate(t=Sum('horas'))['t']
+    total = total_usuario + total_admin
     return "%.2f" % total
   horas_positivas.short_description = 'Horas Positivas'
 
   def horas_negativas(self, obj):
-    total = 0  
-    for n in obj.admin_set.all():
-      total = total + sum([r.horas for r in n.adminind_set.all()])/n.user.count()
-    for i in obj.comprador.all():
-      total = total + i.horas 
-    return "%.2f" % total 
+#    total = 0  
+#    for n in obj.admin_set.all():
+#      total = total + sum([r.horas for r in n.adminind_set.all()])/n.user.count()
+#    for i in obj.comprador.all():
+#      total = total + i.horas 
+#    return "%.2f" % total 
+    total_usuario = total_admin = 0
+    if obj.comprador.count() != 0:
+      total_usuario = obj.comprador.aggregate(t=Sum('horas'))['t']
+    if obj.is_active:
+      total_admin = AdminInd.objects.aggregate(t=Sum('horas'))['t'] / User.objects.filter(is_active=True).count()
+    total = total_admin + total_usuario
+    return "%.2f" % total
   horas_negativas.short_description = 'Horas Negativas'
 
   def horas_totales(self, obj):
-    return float(self.horas_positivas(obj)) - float(self.horas_negativas(obj)) 
+      return "%.2f" % (float(self.horas_positivas(obj)) - float(self.horas_negativas(obj))) 
 
 class AdminIndInLine(admin.TabularInline):
   model = AdminInd
