@@ -8,10 +8,10 @@
       <tr>
         <th><h3>Socio</h3></th>
         <th><h3>Teléfono</h3></th>
-        <th><h3>e-mail</h3></th>
-        <th><h3>Pueblo</h3></th>
-        <th><h3>Descripción</h3></th>
-	<th><h3>Imagen del artículo</h3></th>
+        <th><h3>e-mail<h3></th>
+        <th><h3>Pueblo<h3></th>
+        <th><h3>Descripción<h3></th>
+	<th><h3>Imagen del Artículo</h3></th>
       </tr>
     </thead>
 {% for i in  articulo.all %}
@@ -32,11 +32,11 @@
         <td>{{ i.user.socio.pueblo }}</td>
         <td>{{ i.descripcion }}</td>
 {% if i.imagen %}
-<td class="centrar"><center><a href="{{ i.imagen.url }} " target="_blank"><img src="{{ i.imagen_thumbnail.url }}" /></a></center></td>
+<td class="centrar"><center><a href="" target="_blank">Registro de Intercambio</a></center></td>
 {% else %}
         <td>No hay imagen</td>
-{% endif %}      
-       </tr>
+{% endif %}
+      </tr>
     </tbody>
 {% endif %}
 {% endfor %}

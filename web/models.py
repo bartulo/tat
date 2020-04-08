@@ -121,16 +121,16 @@ Saludos y gracias por mantener vivo Banco del Tiempo Valle del Tiétar''' % (ins
 
 # CORREO para cuando se produce un error en el registro de cuentas
 
-def mandar_error_cuenta(sender, instance,  **kwargs):
-    texto = get_template('mail_error_cuenta.txt')
-    d = Context({ 'horas': instance.horas, 'comprador': instance.comprador.first_name, 'num_comprador': instance.comprador.username, 'vendedor':instance.vendedor.first_name, 'num_vendedor': instance.vendedor.username })
-    text_content = texto.render(d)
-    subject = 'Error en registro de intercambio TaT %s/%s' % (instance.comprador.username, instance.vendedor.username)  
-    msg = EmailMultiAlternatives(subject, text_content, 'tiempoaltiempotietar@gmail.com', [instance.vendedor.email, instance.comprador.email])
-    msg.send()
+#def mandar_error_cuenta(sender, instance,  **kwargs):
+#    texto = get_template('mail_error_cuenta.txt')
+#    d = Context({ 'horas': instance.horas, 'comprador': instance.comprador.first_name, 'num_comprador': instance.comprador.username, 'vendedor':instance.vendedor.first_name, 'num_vendedor': instance.vendedor.username })
+#    text_content = texto.render(d)
+#    subject = 'Error en registro de intercambio TaT %s/%s' % (instance.comprador.username, instance.vendedor.username)  
+#    msg = EmailMultiAlternatives(subject, text_content, 'tiempoaltiempotietar@gmail.com', [instance.vendedor.email, instance.comprador.email])
+#    msg.send()
 
-models.signals.post_save.connect(mandar_mensaje, sender=Cuenta)
-models.signals.pre_delete.connect(mandar_error_cuenta, sender=Cuenta)
+#models.signals.post_save.connect(mandar_mensaje, sender=Cuenta)
+#models.signals.pre_delete.connect(mandar_error_cuenta, sender=Cuenta)
 
 # ADMINISTRADORES 
 

@@ -1,34 +1,12 @@
 {% extends "base.html" %}
-{% load app_filters %}
 {% block content %}
-<script type="text/javascript">
-$(document).ready(function(){
-  if ( $("#hpadmin").length ) {
-    var hpa = parseFloat($("#hpadmin").html())
-  } else {
-    var hpa = 0
-  }
-  if ( $("#hnadmin").length ) {
-    var hna = parseFloat($("#hnadmin").html())
-  } else {
-    var hna = 0
-  }
-  var resultado = parseFloat($("#hp").html()) + hpa - parseFloat($("#hn").html()) - hna
-  $("#total").html( resultado.toFixed(2) );
-  if ( resultado > 0 ) {
-    $("#total").addClass('label-success')
-  } else {
-    $("#total").addClass('label-danger')
-  }
-});
-</script>
 
     {% if user.is_authenticated %}
-        <h1>Hola, {{ user.first_name }}.
-        <h2>Horas positivas: <span id="hp" class="label label-success">{{ user.vendedor.all | sumahoras }}</span>{% if user.adminind_set.all %} + <span id="hpadmin" class="label label-info">{{ user.adminind_set.all | sumahoras }}</span>{% endif %}</h2>
-        <h2>Horas negativas: <span id="hn" class="label label-danger">{{ user.comprador.all | sumahoras }}</span> + <span id="hnadmin" class="label label-info">{{ user | horasadmin }}</span></h2>
-        <h1>Total: <span id="total" class="label"></span></h1>
-<div class="well"><h3><span class="label label-info">En azul</span> horas de compensación a la administración.</h3></div>
+    <h1>Hola, {{ user.first_name }}.</h1>
+        <h2>Horas positivas: <span id="hp" class="label label-success">{{ h_pos | floatformat:2 }}</span>{% if user.adminind_set.all %} + <span id="hpadmin" class="label label-info">{{ admin_pos | floatformat:2 }}</span>{% endif %}</h2>
+        <h2>Horas negativas: <span id="hn" class="label label-danger">{{ h_neg | floatformat:2 }}</span> + <span id="hnadmin" class="label label-info">{{ admin_neg | floatformat:2 }}</span></h2>
+        <h1>Total: <span id="total" class="label {% if total >= 0 %} label-success {% else %} label-danger {% endif %}">{{ total | floatformat:2 }}</span></h1>
+        <div class="well"><h3><span class="label label-info">En azul</span> horas de compensación a la administración.</h3></div>
     {% else %}
 	<h1>Bienvenido a Tiempo al Tiempo</h1>
         <p>Por favor, regístrate</p>

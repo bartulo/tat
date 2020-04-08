@@ -155,7 +155,11 @@ class UserAdmin(UserAdmin):
     if obj.comprador.count() != 0:
       total_usuario = obj.comprador.aggregate(t=Sum('horas'))['t']
     if obj.is_active:
-      total_admin = AdminInd.objects.aggregate(t=Sum('horas'))['t'] / User.objects.filter(is_active=True).count()
+      total_admin = 0
+      for i in Admin.objects.filter(user=obj):
+        num_horas = i.adminind_set.aggregate(t=Sum('horas'))['t']
+        num_socios = i.user.count()
+        total_admin += num_horas / num_socios
     total = total_admin + total_usuario
     return "%.2f" % total
   horas_negativas.short_description = 'Horas Negativas'

@@ -14,7 +14,7 @@
       <input type="hidden" name="subcategoria" value="{{ i.subcategoria }}">
     </form>
   </div>
-  <a class="list-group-item" onclick="direccionar({{ forloop.counter }})">{{ i.nombre |quitarcom }}</a>
+  <a class="list-group-item" onclick="direccionar({{ forloop.counter }})">{{ i.nombre }}</a>
 {% endif %}
 {% endfor %}
 </div>

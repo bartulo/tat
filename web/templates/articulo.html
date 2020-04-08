@@ -6,12 +6,12 @@
   <table class="table table-stripped">
     <thead>
       <tr>
-        <th><h2>Socio</h2></th>
-        <th><h2>Teléfono</h2></th>
-        <th><h2>e-mail<h2></th>
-        <th><h2>Pueblo<h2></th>
-        <th><h2>Descripción<h2></th>
-	<th><h2>Imagen del Artículo</h2></th>
+        <th><h3>Socio</h3></th>
+        <th><h3>Teléfono</h3></th>
+        <th><h3>e-mail</h3></th>
+        <th><h3>Pueblo</h3></th>
+        <th><h3>Descripción</h3></th>
+	<th><h3>Imagen del artículo</h3></th>
       </tr>
     </thead>
 {% for i in  articulo.all %}
@@ -30,13 +30,13 @@
         <td>No proporcionado</td>
 {% endif %}
         <td>{{ i.user.socio.pueblo }}</td>
-        <td>{{ i.descripcion }}</td>i
+        <td>{{ i.descripcion }}</td>
 {% if i.imagen %}
-        <td><a href="" target="_blank">Registro de Intercambio</a></td>
+<td class="centrar"><center><a href="{{ i.imagen.url }} " target="_blank"><img src="{{ i.imagen_thumbnail.url }}" /></a></center></td>
 {% else %}
         <td>No hay imagen</td>
-{% endif %}
-      </tr>
+{% endif %}      
+       </tr>
     </tbody>
 {% endif %}
 {% endfor %}
