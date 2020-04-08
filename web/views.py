@@ -11,30 +11,35 @@ from django.views.generic.edit import CreateView
 from django.template import loader
 from django.db.models import Sum
 
+def calculate_horas(current_user):
+  hpos = current_user.vendedor.aggregate(t=Sum('horas'))['t']
+  hpos = hpos if hpos != None else 0
+  hneg = current_user.comprador.aggregate(t=Sum('horas'))['t']
+  hneg = hneg if hneg != None else 0
+  adminpos = current_user.adminind_set.aggregate(t=Sum('horas'))['t']
+  adminpos = adminpos if adminpos != None else 0
+  adminneg = 0
+  for i in Admin.objects.filter(user=current_user):
+    num_horas = i.adminind_set.aggregate(t=Sum('horas'))['t']
+    num_socios = i.user.count()
+    adminneg += num_horas/num_socios
+  total = hpos + adminpos - hneg - adminneg
+  return [hpos, hneg, adminpos, adminneg, total]
+
 class LoginViewMod(LoginView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     current_user = self.request.user
     if current_user.is_authenticated:
-      hpos = current_user.vendedor.aggregate(t=Sum('horas'))['t'] 
-      hpos = hpos if hpos != None else 0
-      hneg = current_user.comprador.aggregate(t=Sum('horas'))['t']
-      hneg = hneg if hneg != None else 0
-      adminpos = current_user.adminind_set.aggregate(t=Sum('horas'))['t']
-      adminpos = adminpos if adminpos != None else 0
-      adminneg = 0
-      for i in Admin.objects.filter(user=current_user):
-        num_horas = i.adminind_set.aggregate(t=Sum('horas'))['t']
-        num_socios = i.user.count()
-        adminneg += num_horas/num_socios
-      total = hpos + adminpos - hneg - adminneg
+      
+      horas = calculate_horas(current_user)
 
       context.update({
-        'h_pos': hpos,
-        'h_neg': hneg,
-        'admin_pos': adminpos,
-        'admin_neg': adminneg,
-        'total': total,
+        'h_pos': horas[0],
+        'h_neg': horas[1],
+        'admin_pos': horas[2],
+        'admin_neg': horas[3],
+        'total': horas[4],
         })
     return context
         
@@ -132,7 +137,9 @@ def editar_serv(request, num):
 
 @login_required
 def cuentas(request):
-  return render(request, 'cuentas.html')
+  user = request.user
+  horas = calculate_horas(user)
+  return render(request, 'cuentas.html', {'horas_pos': horas[0], 'horas_neg': horas[1]})
 
 def busqueda(request):
   def filtro(cat):

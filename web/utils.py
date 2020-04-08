@@ -1,7 +1,7 @@
 from django.conf import settings
  
 import os
- 
+
 def get_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = "cuenta_de_%s_a_%s_%s_horas_dia_%s.%s" % (instance.vendedor, instance.comprador, instance.horas, instance.fecha.day, ext)

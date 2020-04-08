@@ -31,7 +31,7 @@
 {% endfor %}
       <tr>
         <td></td>
-        <td><h4><span class="label label-danger">{{ user.comprador.all | sumahoras }}</h4></span></td>
+        <td><h4><span class="label label-danger">{{ horas_neg | floatformat:2 }}</h4></span></td>
         <td></td>
       </tr>
   </table>
@@ -66,7 +66,7 @@
 {% endfor %}
       <tr>
         <td></td>
-        <td><h4><span class="label label-success">{{ user.vendedor.all | sumahoras }}</span></h4></td>
+        <td><h4><span class="label label-success">{{ horas_pos }}</span></h4></td>
         <td></td>
       </tr>
   </table>
