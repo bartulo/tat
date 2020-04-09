@@ -155,11 +155,19 @@ class UserAdmin(UserAdmin):
     if obj.comprador.count() != 0:
       total_usuario = obj.comprador.aggregate(t=Sum('horas'))['t']
     if obj.is_active:
-      total_admin = 0
-      for i in Admin.objects.filter(user=obj):
-        num_horas = i.adminind_set.aggregate(t=Sum('horas'))['t']
-        num_socios = i.user.count()
-        total_admin += num_horas / num_socios
+      from django.db import connection
+      cursor = connection.cursor()
+      cursor.execute('select sum(s.sum/c.count) from (select entrada_id, sum(horas) from web_adminind group by entrada_id) as s, (Select admin_id, count(user_id) from web_admin_user group by admin_id) as c, (Select admin_id from web_admin_user where user_id=%s) as u where u.admin_id = entrada_id and c.admin_id = s.entrada_id' % obj.id)
+      row = cursor.fetchone()
+      
+      if row[0]:
+        total_admin = row[0]
+      else:
+        total_admin = 0
+#      for i in Admin.objects.filter(user=obj):
+#        num_horas = i.adminind_set.aggregate(t=Sum('horas'))['t']
+#        num_socios = i.user.count()
+#        total_admin += num_horas / num_socios
     total = total_admin + total_usuario
     return "%.2f" % total
   horas_negativas.short_description = 'Horas Negativas'
