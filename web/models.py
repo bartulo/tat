@@ -129,7 +129,7 @@ Saludos y gracias por mantener vivo Banco del Tiempo Valle del Tiétar''' % (ins
 #    msg = EmailMultiAlternatives(subject, text_content, 'tiempoaltiempotietar@gmail.com', [instance.vendedor.email, instance.comprador.email])
 #    msg.send()
 
-#models.signals.post_save.connect(mandar_mensaje, sender=Cuenta)
+models.signals.post_save.connect(mandar_mensaje, sender=Cuenta)
 #models.signals.pre_delete.connect(mandar_error_cuenta, sender=Cuenta)
 
 # ADMINISTRADORES 
