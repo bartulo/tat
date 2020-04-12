@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.admin.helpers import ActionForm
 from django.http import HttpResponse
 from django import forms
@@ -93,6 +94,12 @@ class ArticuloAdmin(admin.ModelAdmin):
 
 class SocioInline(admin.StackedInline):
   model = Socio
+
+class UserCreationFormExtended(UserCreationForm):
+    username = forms.CharField(label=_('Número de Socio'))
+
+class UserChangeFormExtended(UserChangeForm):
+    username = forms.CharField(label=_('Número de Socio'))
 
 def exportar_csv(modeladmin, request, queryset):
     import csv
@@ -190,6 +197,9 @@ class AdminAdmin(admin.ModelAdmin):
     obj.save()
     for i in User.objects.filter(is_active=True):
       obj.user.add(i)
+
+UserAdmin.add_form = UserCreationFormExtended
+UserAdmin.form = UserChangeFormExtended
 
 admin.site.register(Articulo, ArticuloAdmin)
 admin.site.register(SubCategoriaArticulo)
