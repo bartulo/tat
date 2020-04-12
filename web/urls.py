@@ -6,8 +6,8 @@ from . import views
 urlpatterns = [
     path('', views.LoginViewMod.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
-#    path('passwordReset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-#    path('passwordResetConfirm/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset'),
+    path('passwordReset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('passwordResetConfirm/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset'),
     path('passwordResetDone/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
     path('cuentas/', views.cuentas, name='cuentas'),
     path('contacto/', views.contacto, name='contacto'),
